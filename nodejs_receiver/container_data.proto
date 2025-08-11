@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package container;
+
+// Container data message for IoT sensor data
+message ContainerData {
+  // String fields
+  string msisdn = 1;      // SIM ID
+  string iso6346 = 2;     // Container ID
+  string time = 3;        // UTC time DDMMYY hhmmss.s
+  string cgi = 4;         // Cell ID Location
+  string door = 5;        // Door status
+  
+  // Integer fields (uint8 equivalent)
+  uint32 rssi = 6;        // RSSI
+  uint32 ble_m = 7;       // BLE source node
+  uint32 bat_soc = 8;     // Battery %
+  uint32 gnss = 9;        // GPS status
+  uint32 nsat = 10;       // Number of satellites
+  
+  // Accelerometer data (3 floats)
+  float acc_x = 11;       // Accelerometer X
+  float acc_y = 12;       // Accelerometer Y
+  float acc_z = 13;       // Accelerometer Z
+  
+  // Float fields
+  float temperature = 14; // °C
+  float humidity = 15;    // %RH
+  float pressure = 16;    // hPa
+  float latitude = 17;    // DD
+  float longitude = 18;   // DD
+  float altitude = 19;    // meters
+  float speed = 20;       // m/s
+  float heading = 21;     // degrees
+  float hdop = 22;        // HDOP
+} 

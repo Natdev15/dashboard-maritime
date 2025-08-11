@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maritime Container Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🚢 Maritime Container Dashboard</h1>
+            <div class="header-stats">
+                <div class="stat-card">
+                    <span class="stat-label">Total Containers</span>
+                    <span class="stat-value" id="totalContainers">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Queue Length</span>
+                    <span class="stat-value" id="queueLength">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" id="uptime">-</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="controls">
+                <button class="btn btn-primary" id="refreshBtn">🔄 Refresh</button>
+                <button class="btn btn-secondary" id="autoRefreshBtn">⏰ Auto Refresh: OFF</button>
+                <input type="text" id="searchContainer" placeholder="Search container ID..." class="search-input">
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- System Statistics -->
+                <div class="card system-stats">
+                    <h3>System Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number" id="totalRecords">0</span>
+                            <span class="stat-desc">Total Records</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="uniqueContainers">0</span>
+                            <span class="stat-desc">Unique Containers</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="successRate">0%</span>
+                            <span class="stat-desc">Success Rate</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="avgCompression">0x</span>
+                            <span class="stat-desc">Avg Compression</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Chart -->
+                <div class="card chart-container">
+                    <h3>📈 Container Activity (Last Hour)</h3>
+                    <canvas id="activityChart"></canvas>
+                </div>
+
+                <!-- Container List -->
+                <div class="card container-list">
+                    <h3>Recent Containers</h3>
+                    <div class="table-container">
+                        <table id="containerTable">
+                            <thead>
+                                <tr>
+                                    <th>Container ID</th>
+                                    <th>Location</th>
+                                    <th>Temperature</th>
+                                    <th>Battery</th>
+                                    <th>Status</th>
+                                    <th>Last Update</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="containerTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Container Details Modal -->
+                <div id="containerModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 id="modalTitle">Container Details</h2>
+                            <button class="close-btn" id="closeModal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="containerDetails">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="spinner"></div>
+            <p>Loading container data...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
