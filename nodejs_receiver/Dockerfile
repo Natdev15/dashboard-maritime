@@ -21,8 +21,11 @@ COPY package*.json ./
 RUN npm install --only=production && \
     npm rebuild sqlite3 --build-from-source
 
-# Copy application code
-COPY . .
+# Copy nodejs_receiver files
+COPY nodejs_receiver/ .
+
+# Copy public directory
+COPY public/ ./public
 
 # Create logs directory
 RUN mkdir -p /app/logs

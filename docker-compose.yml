@@ -20,10 +20,11 @@ services:
   # Node.js receiver service (scalable)
   container-receiver:
     build:
-      context: ./nodejs_receiver
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./nodejs_receiver/Dockerfile
     ports:
       - "3002:3002"  # Dashboard UI
+      - "80:3002"    # Alternative Dashboard UI port (port 80)
       - "3001:3001"  # Direct receiver access (bypass nginx)
     environment:
       - NODE_ENV=production

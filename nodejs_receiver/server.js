@@ -537,8 +537,37 @@ app.use((req, res) => {
 // Dashboard Server (Port 3001)
 // ------------------------
 
+// CORS middleware for dashboard
+dashboardApp.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    
+    // Remove restrictive Content Security Policy for dashboard
+    res.removeHeader('Content-Security-Policy');
+    
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+        return;
+    }
+    
+    next();
+});
+
 // Serve static dashboard UI
-dashboardApp.use(express.static(path.join(__dirname, '..', 'public')));
+dashboardApp.use(express.static(path.join(__dirname, 'public')));
+
+// Root route - serve index.html
+dashboardApp.get('/', (req, res) => {
+    const indexPath = path.join(__dirname, 'public', 'index.html');
+    console.log('Serving index.html from:', indexPath);
+    res.sendFile(indexPath, (err) => {
+        if (err) {
+            console.error('Error serving index.html:', err);
+            res.status(500).send('Error loading dashboard');
+        }
+    });
+});
 
 // API: Recent containers
 dashboardApp.get('/api/containers', async (req, res) => {
